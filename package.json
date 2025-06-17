@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "git": "read -p \"Enter commit message: \" msg; git add .; git commit -m \"$msg\"; git push",
-    "publish": "pnpm -r publish",
+    "publish": "pnpm -r --filter ./packages/... publish",
     "clean": "pnpm -r clean",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
