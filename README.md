@@ -136,6 +136,37 @@ pnpm mdxlayer dev
 │   └── index.js
 ```
 
+## Plugins
+
+## `next-mdxlayer`
+
+## 📦 Installation
+
+```bash
+pnpm add -D next-mdxlayer
+# or
+npm install -D next-mdxlayer
+# or
+yarn add -D next-mdxlayer
+```
+
+## ⚙️ Configuration
+
+```ts
+import { withMdxlayer } from 'next-mdxlayer';
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  pageExtensions: ['js', 'ts', 'jsx', 'tsx', 'mdx'],
+  experimental: {
+    serverActions: true,
+  },
+};
+
+export default withMdxlayer(nextConfig);
+```
+
 ## 🔩 API
 
 ### `defineConfig(config)`
