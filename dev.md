@@ -1,1 +1,2 @@
 - npm publish --tag beta
+- git reset --mixed HEAD~1

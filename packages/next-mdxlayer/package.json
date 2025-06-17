@@ -1,7 +1,7 @@
 {
   "name": "next-mdxlayer",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Next.js plugin to integrate mdxlayer CLI and generated content",
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.cjs",
@@ -12,6 +12,7 @@
     "clean": "rm -rf dist",
     "build": "pnpm vite build",
     "dev": "pnpm vite build -w",
+    "version-patch": "npm version patch",
     "prepare": "pnpm clean && pnpm lint && pnpm check-types && pnpm build",
     "publish": "npm publish --access public"
   },

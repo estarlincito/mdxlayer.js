@@ -1,13 +1,15 @@
 {
   "name": "mdxlayer.js",
+  "type": "module",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "git": "read -p \"Enter commit message: \" msg; git add .; git commit -m \"$msg\"; git push",
-    "publish": "pnpm -r --filter ./packages/... publish",
+    "version-patch": "pnpm -r version-patch",
+    "git": "pnpm version-patch && read -p \"Enter commit message: \" msg; git add .; git commit -m \"$msg\"; git push",
     "clean": "pnpm -r clean",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
+    "prebuild": "node readme.ts",
     "check-types": "pnpm -r check-types"
   },
   "devDependencies": {
