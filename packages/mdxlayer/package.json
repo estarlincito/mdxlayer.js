@@ -1,0 +1,61 @@
+{
+  "name": "mdxlayer",
+  "type": "module",
+  "version": "1.0.2",
+  "description": "Transform your MDX content into typed, JSON-powered data with flexible schema validation.",
+  "types": "./dist/esm/index.d.ts",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.mjs",
+  "bin": {
+    "mdxlayer": "./dist/cjs/cli.cjs"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "clean": "rm -rf dist",
+    "build": "pnpm vite build",
+    "dev": "pnpm vite build -w",
+    "prepare": "pnpm clean && pnpm lint && pnpm check-types && pnpm build",
+    "publish": "npm publish --access public"
+  },
+  "keywords": [
+    "mdxlayer",
+    "mdx",
+    "json output",
+    "typed content",
+    "markdown",
+    "mdx parser",
+    "static content",
+    "node",
+    "nextjs",
+    "react"
+  ],
+  "author": {
+    "name": "Estarlin R",
+    "email": "dev@estarlincito.com",
+    "url": "https://estarlincito.com"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/estarlincito/mdxlayer.js#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/estarlincito/mdxlayer.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/estarlincito/mdxlayer.js/issues"
+  },
+  "devDependencies": {
+    "@mdx-js/mdx": "^3.1.0",
+    "esbuild": "^0.25.5",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
+    "tyne": "^1.0.1",
+    "unified": "^11.0.5",
+    "@repo/dev": "workspace:*"
+  }
+}

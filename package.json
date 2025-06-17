@@ -1,0 +1,33 @@
+{
+  "name": "mdxlayer.js",
+  "private": true,
+  "scripts": {
+    "git": "read -p \"Enter commit message: \" msg; git add .; git commit -m \"$msg\"; git push",
+    "publish": "pnpm -r publish",
+    "clean": "pnpm -r clean",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "check-types": "pnpm -r check-types"
+  },
+  "devDependencies": {
+    "@estarlincito/eslint": "^1.9.0",
+    "@types/node": "^22.15.32",
+    "esbuild": "^0.25.5",
+    "eslint": "^9.29.0",
+    "fast-glob": "^3.3.3",
+    "prettier": "^3.5.3",
+    "prettier-plugin-packagejson": "^2.5.15",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.2.3"
+  },
+  "packageManager": "pnpm@10.4.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "unrs-resolver"
+    ]
+  }
+}
