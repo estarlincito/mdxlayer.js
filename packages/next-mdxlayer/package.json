@@ -1,7 +1,7 @@
 {
   "name": "next-mdxlayer",
   "type": "module",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Next.js plugin to integrate mdxlayer CLI and generated content",
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.cjs",

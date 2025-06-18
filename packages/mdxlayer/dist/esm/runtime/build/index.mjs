@@ -30,17 +30,15 @@ const build = async ({
         console.error(`❌ Invalid ${docType} frontmatter:`, parsed.error);
         process.exit(1);
       }
-      const resolved = {};
       if (resolvedFields) {
         for (const [key, { resolve }] of Object.entries(resolvedFields)) {
-          resolved[key] = resolve(data);
+          data[key] = resolve(data);
         }
       }
       const filename = file.replace(/\.mdx$/, "");
       const doc = {
         _id: filename,
         ...data,
-        ...resolved,
         _body: { raw: content },
         _filePath: fullPath
       };

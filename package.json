@@ -4,8 +4,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "release": "pnpm -r release",
-    "release-": "pnpm -r --filter './packages/*' publish --access public",
+    "release": "pnpm -r --filter './packages/*' publish --access public",
     "version-patch": "pnpm -r version-patch",
     "git": "pnpm version-patch && read -p \"Enter commit message: \" msg; git add .; git commit -m \"$msg\"; git push",
     "clean": "pnpm -r clean",

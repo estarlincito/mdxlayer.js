@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -41,11 +40,9 @@ export const build = async ({
         process.exit(1);
       }
       // Resolving fields
-      const resolved: Record<string, any> = {};
-
       if (resolvedFields) {
         for (const [key, { resolve }] of Object.entries(resolvedFields)) {
-          resolved[key] = resolve(data as Doc);
+          data[key] = resolve(data as Doc);
         }
       }
 
@@ -54,7 +51,7 @@ export const build = async ({
       const doc: Doc = {
         _id: filename,
         ...data,
-        ...resolved,
+
         _body: { raw: content },
         _filePath: fullPath,
       };
