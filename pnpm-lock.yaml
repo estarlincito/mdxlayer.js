@@ -77,6 +77,16 @@ importers:
         specifier: workspace:*
         version: link:../dev
 
+  playground:
+    dependencies:
+      mdxlayer:
+        specifier: link:../packages/mdxlayer
+        version: link:../packages/mdxlayer
+    devDependencies:
+      tyne:
+        specifier: ^1.0.1
+        version: 1.0.1
+
 packages:
 
   '@babel/helper-string-parser@7.27.1':

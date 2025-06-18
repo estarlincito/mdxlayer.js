@@ -1,16 +1,34 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import { t } from 'tyne';
+import { readCache, updateCache } from '../../../utils/cache.mjs';
+import { toHashNumber } from '../../../utils/hash.mjs';
 import { transformFile } from '../../../utils/transform.mjs';
 
-const toTypesDts = (types) => {
-  const typesPath = path.resolve(process.cwd(), ".mdxlayer", "types.d.ts");
-  const isChanged = !fs.existsSync(typesPath);
+const toTypesDts = ({
+  resolvedFields,
+  frontmatterSchema,
+  docType
+}) => {
+  const defaultSchema = {
+    _body: t.object({ raw: t.string() }),
+    _filePath: t.string(),
+    _id: t.string()
+  };
+  if (resolvedFields) {
+    for (const [key, { types }] of Object.entries(resolvedFields)) {
+      defaultSchema[key] = types;
+    }
+  }
+  const doc = t.object({ ...frontmatterSchema.shape, ...defaultSchema }).toDts(docType);
+  const newSig = toHashNumber(doc);
+  const cache = readCache();
+  const isChanged = cache.typesSig !== newSig;
   if (isChanged) {
     transformFile({
-      doc: types,
+      doc,
       filename: "types.d.ts",
       subpath: "generated"
     });
+    updateCache({ ...cache, typesSig: newSig });
   }
 };
 

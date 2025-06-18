@@ -1,7 +1,7 @@
 {
   "name": "mdxlayer",
   "type": "module",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Transform your MDX content into typed, JSON-powered data with flexible schema validation.",
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.cjs",
@@ -17,7 +17,7 @@
     "build": "pnpm vite build",
     "dev": "pnpm vite build -w",
     "prepare": "pnpm clean && pnpm lint && pnpm check-types && pnpm build",
-    "publish": "npm publish --access public"
+    "release": "npm publish --access public"
   },
   "keywords": [
     "mdxlayer",

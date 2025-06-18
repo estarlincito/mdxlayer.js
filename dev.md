@@ -1,2 +1,4 @@
 - npm publish --tag beta
 - git reset --mixed HEAD~1
+- git push -forse
+- pnpm publish

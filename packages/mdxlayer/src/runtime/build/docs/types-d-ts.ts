@@ -1,22 +1,42 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import { t, type TyneType } from 'tyne';
 
-// import { toHash } from '@/utils/hash.js';
+import type { Config } from '@/types.js';
+import { readCache, updateCache } from '@/utils/cache.js';
+import { toHashNumber } from '@/utils/hash.js';
 import { transformFile } from '@/utils/transform.js';
 
-export const toTypesDts = (types: string) => {
-  const typesPath = path.resolve(process.cwd(), '.mdxlayer', 'types.d.ts');
+export const toTypesDts = ({
+  resolvedFields,
+  frontmatterSchema,
+  docType,
+}: Pick<Config, 'resolvedFields' | 'frontmatterSchema' | 'docType'>) => {
+  const defaultSchema: Record<string, TyneType> = {
+    _body: t.object({ raw: t.string() }),
+    _filePath: t.string(),
+    _id: t.string(),
+  };
 
-  const isChanged = !fs.existsSync(typesPath);
-  // ||
-  // toHash(content) !== toHash(fs.readFileSync(typesPath, 'utf-8'));
+  if (resolvedFields) {
+    for (const [key, { types }] of Object.entries(resolvedFields)) {
+      defaultSchema[key] = types;
+    }
+  }
+
+  const doc = t
+    .object({ ...frontmatterSchema.shape, ...defaultSchema })
+    .toDts(docType);
+
+  const newSig = toHashNumber(doc);
+  const cache = readCache();
+  const isChanged = cache.typesSig !== newSig;
 
   if (isChanged) {
-    // types.d.ts
     transformFile({
-      doc: types,
+      doc,
       filename: 'types.d.ts',
       subpath: 'generated',
     });
+
+    updateCache({ ...cache, typesSig: newSig });
   }
 };

@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 
-const fs = require('node:fs');
-const path = require('node:path');
+const cache = require('../../../utils/cache.cjs');
+const hash = require('../../../utils/hash.cjs');
 const transform = require('../../../utils/transform.cjs');
 
 const toIndexDts = (exp, docType) => {
@@ -11,14 +11,16 @@ const toIndexDts = (exp, docType) => {
 
 export * from './types';
 ${Object.keys(exp).map((impName) => `export declare const ${impName}: ${docType}[];`).join("\n")}`;
-  const indexPath = path.resolve(process.cwd(), ".mdxlayer", "index.d.ts");
-  const isChanged = !fs.existsSync(indexPath);
+  const newSig = hash.toHashNumber(content);
+  const cache$1 = cache.readCache();
+  const isChanged = cache$1.indexDtsSig !== newSig;
   if (isChanged) {
     transform.transformFile({
       doc: content,
       filename: "index.d.ts",
       subpath: "generated"
     });
+    cache.updateCache({ ...cache$1, indexDtsSig: newSig });
   }
 };
 
