@@ -8,19 +8,19 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/esm/index.d.ts",
       "require": "./dist/cjs/index.cjs",
-      "import": "./dist/esm/index.mjs",
-      "types": "./dist/esm/index.d.ts"
+      "import": "./dist/esm/index.mjs"
     },
     "./builder": {
+      "types": "./dist/esm/builder/index.d.ts",
       "require": "./dist/cjs/builder/index.cjs",
-      "import": "./dist/esm/builder/index.mjs",
-      "types": "./dist/esm/builder/index.d.ts"
+      "import": "./dist/esm/builder/index.mjs"
     },
     "./watcher": {
+      "types": "./dist/esm/watcher/index.d.ts",
       "require": "./dist/cjs/watcher/index.cjs",
-      "import": "./dist/esm/watcher/index.mjs",
-      "types": "./dist/esm/watcher/index.d.ts"
+      "import": "./dist/esm/watcher/index.mjs"
     }
   },
   "typesVersions": {
