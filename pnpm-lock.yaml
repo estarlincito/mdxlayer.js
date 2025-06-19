@@ -77,8 +77,8 @@ importers:
   packages/next-mdxlayer:
     dependencies:
       mdxlayer:
-        specifier: ^1.0.6
-        version: 1.0.6
+        specifier: ^1.0.8
+        version: 1.0.8
     devDependencies:
       '@repo/dev':
         specifier: workspace:*
@@ -1797,8 +1797,8 @@ packages:
   mdast-util-to-string@4.0.0:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
 
-  mdxlayer@1.0.6:
-    resolution: {integrity: sha512-daznbYfgQj13GzXndOHCub70RL9qEsvVpbjG8NHStw4XSu5o3qLlW0CSVSxoQtGr9ef3uurRp6bkJlaTPCqYnQ==}
+  mdxlayer@1.0.8:
+    resolution: {integrity: sha512-wjaOs6jnctd7zNfvvsQiZNNkZgbJz/8MOcnPzn2S5mUrvUd2VWD0Rrbta1o+d6YatZ0fFDVNdCrBJGDOmo7hwg==}
     hasBin: true
 
   merge2@1.4.1:
@@ -4547,7 +4547,7 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
 
-  mdxlayer@1.0.6: {}
+  mdxlayer@1.0.8: {}
 
   merge2@1.4.1: {}
 

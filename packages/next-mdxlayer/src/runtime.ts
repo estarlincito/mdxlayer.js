@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-param-reassign */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import path from 'node:path';
 
-// @ts-ignore
 import { builder } from 'mdxlayer/builder';
-// @ts-ignore
 import { watcher } from 'mdxlayer/watcher';
 
 let devProcess = null;
@@ -27,13 +24,18 @@ const isBuild = process.argv.includes('build');
  */
 export const withMdxlayer = (nextConfig = {}) => {
   if (isDev) {
-    devProcess ??= watcher();
+    setInterval(async () => {
+      devProcess ??= await watcher();
+    }, 100);
   }
 
   if (isBuild) {
     if (!buildExecuted) {
       buildExecuted = true;
-      builder();
+
+      setInterval(async () => {
+        await builder();
+      }, 100);
     }
   }
 
