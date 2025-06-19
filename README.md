@@ -51,8 +51,11 @@ export default defineConfig({
   contentDir: 'content',
   frontmatterSchema: ArticleSchema,
   resolvedFields: {
-    title_: { resolve: (doc) => doc.title },
-    slug: { resolve: (doc) => doc.file.replace(/\.mdx$/, '') },
+    title_: { resolve: (doc) => doc.title, type: t.string() },
+    slug: {
+      resolve: (doc) => doc.file.replace(/\.mdx$/, ''),
+      type: t.string(),
+    },
   },
 });
 ```

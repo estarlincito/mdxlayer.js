@@ -17,8 +17,8 @@ const toTypesDts = ({
     _id: tyne.t.string()
   };
   if (resolvedFields) {
-    for (const [key, { types }] of Object.entries(resolvedFields)) {
-      defaultSchema[key] = types;
+    for (const [key, { type }] of Object.entries(resolvedFields)) {
+      defaultSchema[key] = type;
     }
   }
   const doc = tyne.t.object({ ...frontmatterSchema.shape, ...defaultSchema }).toDts(docType);

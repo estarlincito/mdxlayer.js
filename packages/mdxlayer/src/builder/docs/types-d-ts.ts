@@ -16,8 +16,8 @@ export const toTypesDts = ({
   };
 
   if (resolvedFields) {
-    for (const [key, { types }] of Object.entries(resolvedFields)) {
-      defaultSchema[key] = types;
+    for (const [key, { type }] of Object.entries(resolvedFields)) {
+      defaultSchema[key] = type;
     }
   }
 

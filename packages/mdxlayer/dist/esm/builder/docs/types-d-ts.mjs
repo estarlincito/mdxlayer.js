@@ -13,8 +13,8 @@ const toTypesDts = ({
     _id: t.string()
   };
   if (resolvedFields) {
-    for (const [key, { types }] of Object.entries(resolvedFields)) {
-      defaultSchema[key] = types;
+    for (const [key, { type }] of Object.entries(resolvedFields)) {
+      defaultSchema[key] = type;
     }
   }
   const doc = t.object({ ...frontmatterSchema.shape, ...defaultSchema }).toDts(docType);

@@ -14,7 +14,7 @@ export interface Doc {
 }
 export type FieldResolver = Record<string, {
     resolve: (doc: Doc) => any | Promise<any>;
-    types: TyneType;
+    type: TyneType;
 }>;
 export interface Config {
     docType: string;
