@@ -75,6 +75,10 @@ importers:
         version: 11.0.5
 
   packages/next-mdxlayer:
+    dependencies:
+      mdxlayer:
+        specifier: ^1.0.6
+        version: 1.0.6
     devDependencies:
       '@repo/dev':
         specifier: workspace:*
@@ -1793,6 +1797,10 @@ packages:
   mdast-util-to-string@4.0.0:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
 
+  mdxlayer@1.0.6:
+    resolution: {integrity: sha512-daznbYfgQj13GzXndOHCub70RL9qEsvVpbjG8NHStw4XSu5o3qLlW0CSVSxoQtGr9ef3uurRp6bkJlaTPCqYnQ==}
+    hasBin: true
+
   merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
@@ -2753,7 +2761,7 @@ snapshots:
       eslint: 9.29.0
       eslint-config-prettier: 10.1.5(eslint@9.29.0)
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0))(eslint@9.29.0)
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0))(eslint@9.29.0))(eslint@9.29.0)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.29.0)
       eslint-plugin-prettier: 5.4.1(eslint-config-prettier@10.1.5(eslint@9.29.0))(eslint@9.29.0)(prettier@3.5.3)
       eslint-plugin-react: 7.37.5(eslint@9.29.0)
       eslint-plugin-react-hooks: 5.2.0(eslint@9.29.0)
@@ -3760,7 +3768,7 @@ snapshots:
       tinyglobby: 0.2.14
       unrs-resolver: 1.9.0
     optionalDependencies:
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0))(eslint@9.29.0))(eslint@9.29.0)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.29.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -3775,7 +3783,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0))(eslint@9.29.0))(eslint@9.29.0):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.29.0):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -4538,6 +4546,8 @@ snapshots:
   mdast-util-to-string@4.0.0:
     dependencies:
       '@types/mdast': 4.0.4
+
+  mdxlayer@1.0.6: {}
 
   merge2@1.4.1: {}
 

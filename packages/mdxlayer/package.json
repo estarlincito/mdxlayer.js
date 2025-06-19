@@ -1,7 +1,7 @@
 {
   "name": "mdxlayer",
   "type": "module",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Transform your MDX content into typed, JSON-powered data with flexible schema validation.",
   "types": "./dist/esm/index.d.ts",
   "bin": {
