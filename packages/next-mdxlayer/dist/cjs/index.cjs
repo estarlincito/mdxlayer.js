@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 
-const core = require('./core.cjs');
+const runtime = require('./runtime.cjs');
 
 
 
-exports.withMdxlayer = core.withMdxlayer;
+exports.withMdxlayer = runtime.withMdxlayer;

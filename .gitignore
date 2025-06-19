@@ -14,3 +14,4 @@ yarn-error.log*
 .env*.local
 /packages/**/README.md
 /packages/**/LICENSE
+/packages/**/dist/cjs

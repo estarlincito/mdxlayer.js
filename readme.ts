@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import fg from 'fast-glob';
-import { toHashNumber } from './packages/mdxlayer/src/utils/hash.ts';
+import { hash } from './packages/mdxlayer/src/utils/hash.ts';
 
 const toDocs = async (file: string) => {
   const folders = await fg('packages/*', { onlyDirectories: true });
@@ -18,7 +18,7 @@ const toDocs = async (file: string) => {
       }
     })();
 
-    if (toHashNumber(rootContent) !== toHashNumber(pkgContent)) {
+    if (hash.number(rootContent) !== hash.number(pkgContent)) {
       fs.writeFileSync(filePath, rootContent);
     }
   });

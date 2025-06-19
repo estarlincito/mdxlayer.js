@@ -1,1 +1,1 @@
-export { withMdxlayer } from './core.mjs';
+export { withMdxlayer } from './runtime.mjs';

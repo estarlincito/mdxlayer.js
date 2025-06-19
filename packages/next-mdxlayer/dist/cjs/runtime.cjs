@@ -2,31 +2,34 @@
 
 Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 
-const child_process = require('child_process');
+const path = require('node:path');
+const builder = require('mdxlayer/builder');
+const watcher = require('mdxlayer/watcher');
 
-const runMdxlayer = (mode) => {
-  const command = process.platform === "win32" ? "npx.cmd" : "npx";
-  if (mode === "dev") {
-    const proc = child_process.spawn(command, ["mdxlayer", "dev"], {
-      shell: false,
-      stdio: "inherit"
-    });
-    proc.on("error", (err) => {
-      console.error(`[mdxlayer dev] error:`, err);
-    });
-    console.log("> mdxlayer dev started");
-    return proc;
+let devProcess = null;
+let buildExecuted = false;
+const isDev = process.argv.includes("dev");
+const isBuild = process.argv.includes("build");
+const withMdxlayer = (nextConfig = {}) => {
+  if (isDev) {
+    devProcess ??= watcher.watcher();
   }
-  if (mode === "build") {
-    const result = child_process.spawnSync(command, ["mdxlayer", "build"], {
-      stdio: "inherit"
-    });
-    if (result.status !== 0) {
-      throw new Error("❌ mdxlayer build failed");
+  if (isBuild) {
+    if (!buildExecuted) {
+      buildExecuted = true;
+      builder.builder();
     }
-    console.log("> mdxlayer build completed");
   }
-  return null;
+  return {
+    ...nextConfig,
+    webpack(config) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        "mdxlayer/generated": path.join(process.cwd(), ".mdxlayer/generated")
+      };
+      return config;
+    }
+  };
 };
 
-exports.runMdxlayer = runMdxlayer;
+exports.withMdxlayer = withMdxlayer;
