@@ -2,9 +2,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import type { Doc } from '@/types.js';
-
-import type { Cache } from './cache.js';
+import type { Cache } from '@/cache/index.js';
+import type { Doc } from '@/types/index.js';
 
 export interface TransformFileParams {
   doc: Doc | string | Cache;

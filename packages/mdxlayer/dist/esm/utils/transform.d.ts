@@ -1,5 +1,5 @@
-import { Doc } from '../types.js';
-import { Cache } from './cache.js';
+import { Cache } from '../cache/index.js';
+import { Doc } from '../types/index.js';
 export interface TransformFileParams {
     doc: Doc | string | Cache;
     subpath: string;

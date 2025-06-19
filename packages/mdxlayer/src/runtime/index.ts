@@ -1,20 +1,13 @@
-// runtime/index.ts
-import { getUserConfig } from '@/config.js';
+import { builder } from '@/builder/index.js';
 import { getArgs } from '@/utils/args.js';
-
-import { build } from './build/index.js';
-import { dev } from './dev.js';
+import { watcher } from '@/watcher/index.js';
 
 export const run = async () => {
   const isBuild = getArgs('build');
   const isDev = getArgs('dev');
 
   if (isBuild || isDev) {
-    const config = await getUserConfig();
-    if (isBuild) await build(config);
-    if (isDev) await dev(config);
+    if (isBuild) await builder();
+    if (isDev) await watcher();
   }
 };
-
-// mdxlayer build
-// mdxlayer dev

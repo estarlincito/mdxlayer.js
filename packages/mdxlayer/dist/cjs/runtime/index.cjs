@@ -2,18 +2,16 @@
 
 Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 
-const config = require('../config.cjs');
+const index = require('../builder/index.cjs');
 const args = require('../utils/args.cjs');
-const index = require('./build/index.cjs');
-const dev = require('./dev.cjs');
+const index$1 = require('../watcher/index.cjs');
 
 const run = async () => {
   const isBuild = args.getArgs("build");
   const isDev = args.getArgs("dev");
   if (isBuild || isDev) {
-    const config$1 = await config.getUserConfig();
-    if (isBuild) await index.build(config$1);
-    if (isDev) await dev.dev(config$1);
+    if (isBuild) await index.builder();
+    if (isDev) await index$1.watcher();
   }
 };
 

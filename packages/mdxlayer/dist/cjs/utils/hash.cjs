@@ -4,9 +4,11 @@ Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 
 const crypto = require('crypto');
 
-const toHashNumber = (content) => {
-  const hash = crypto.createHash("md5").update(content).digest();
-  return hash.readUInt32BE(0) + hash.readUInt32BE(4);
+const string = (content) => crypto.createHash("md5").update(content).digest("hex");
+const number = (content) => {
+  const hash2 = crypto.createHash("md5").update(content).digest();
+  return hash2.readUInt32BE(0) + hash2.readUInt32BE(4);
 };
+const hash = { number, string };
 
-exports.toHashNumber = toHashNumber;
+exports.hash = hash;

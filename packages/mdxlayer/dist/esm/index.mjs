@@ -1,1 +1,1 @@
-export { defineConfig } from './config.mjs';
+export { defineConfig } from './config/index.mjs';

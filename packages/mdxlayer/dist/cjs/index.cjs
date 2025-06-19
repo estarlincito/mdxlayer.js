@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 
-const config = require('./config.cjs');
+const index = require('./config/index.cjs');
 
 
 
-exports.defineConfig = config.defineConfig;
+exports.defineConfig = index.defineConfig;

@@ -1,13 +1,25 @@
 {
   "name": "mdxlayer",
   "type": "module",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Transform your MDX content into typed, JSON-powered data with flexible schema validation.",
   "types": "./dist/esm/index.d.ts",
-  "main": "./dist/cjs/index.cjs",
-  "module": "./dist/esm/index.mjs",
   "bin": {
     "mdxlayer": "./dist/cjs/cli.cjs"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.cjs",
+      "import": "./dist/esm/index.mjs"
+    },
+    "./builder": {
+      "require": "./dist/cjs/builder/index.cjs",
+      "import": "./dist/esm/builder/index.mjs"
+    },
+    "./watcher": {
+      "require": "./dist/cjs/watcher/index.cjs",
+      "import": "./dist/esm/watcher/index.mjs"
+    }
   },
   "scripts": {
     "version-patch": "npm version patch",
@@ -52,11 +64,12 @@
   },
   "devDependencies": {
     "@mdx-js/mdx": "^3.1.0",
+    "@repo/dev": "workspace:*",
+    "chokidar": "^4.0.3",
     "esbuild": "^0.25.5",
     "fast-glob": "^3.3.3",
     "gray-matter": "^4.0.3",
     "tyne": "^1.0.1",
-    "unified": "^11.0.5",
-    "@repo/dev": "workspace:*"
+    "unified": "^11.0.5"
   }
 }

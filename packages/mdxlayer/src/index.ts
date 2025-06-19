@@ -1,2 +1,2 @@
-export { defineConfig } from './config.js';
-export type * from './types.js';
+export { defineConfig } from './config/index.js';
+export type * from './types/index.js';

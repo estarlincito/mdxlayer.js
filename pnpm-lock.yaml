@@ -55,6 +55,9 @@ importers:
       '@repo/dev':
         specifier: workspace:*
         version: link:../dev
+      chokidar:
+        specifier: ^4.0.3
+        version: 4.0.3
       esbuild:
         specifier: ^0.25.5
         version: 0.25.5
@@ -977,6 +980,10 @@ packages:
   check-error@2.1.1:
     resolution: {integrity: sha512-OAlb+T7V4Op9OwdkjmguYRqncdlx5JiofwOAUkmTF+jNdHwzTaTs4sRAGpzLF3oOz5xAyDGrPgeIDFQmDOTiJw==}
     engines: {node: '>= 16'}
+
+  chokidar@4.0.3:
+    resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
+    engines: {node: '>= 14.16.0'}
 
   collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
@@ -2054,6 +2061,10 @@ packages:
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
+  readdirp@4.1.2:
+    resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
+    engines: {node: '>= 14.18.0'}
+
   recma-build-jsx@1.0.0:
     resolution: {integrity: sha512-8GtdyqaBcDfva+GUKDr3nev3VpKAhup1+RvkMvUxURHpW7QyIvk9F5wz7Vzo06CEMSilw6uArgRqhpiUcWp8ew==}
 
@@ -2742,7 +2753,7 @@ snapshots:
       eslint: 9.29.0
       eslint-config-prettier: 10.1.5(eslint@9.29.0)
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0))(eslint@9.29.0)
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.29.0)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0))(eslint@9.29.0))(eslint@9.29.0)
       eslint-plugin-prettier: 5.4.1(eslint-config-prettier@10.1.5(eslint@9.29.0))(eslint@9.29.0)(prettier@3.5.3)
       eslint-plugin-react: 7.37.5(eslint@9.29.0)
       eslint-plugin-react-hooks: 5.2.0(eslint@9.29.0)
@@ -3477,6 +3488,10 @@ snapshots:
 
   check-error@2.1.1: {}
 
+  chokidar@4.0.3:
+    dependencies:
+      readdirp: 4.1.2
+
   collapse-white-space@2.1.0: {}
 
   color-convert@2.0.1:
@@ -3745,7 +3760,7 @@ snapshots:
       tinyglobby: 0.2.14
       unrs-resolver: 1.9.0
     optionalDependencies:
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.29.0)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0))(eslint@9.29.0))(eslint@9.29.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -3760,7 +3775,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.29.0):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0))(eslint@9.29.0))(eslint@9.29.0):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -4915,6 +4930,8 @@ snapshots:
   queue-microtask@1.2.3: {}
 
   react-is@16.13.1: {}
+
+  readdirp@4.1.2: {}
 
   recma-build-jsx@1.0.0:
     dependencies:
