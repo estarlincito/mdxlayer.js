@@ -22,9 +22,10 @@ const isBuild = process.argv.includes('build');
  * @param {import('next').NextConfig} [nextConfig={}] - Optional Next.js configuration object.
  * @returns {import('next').NextConfig} - The enhanced Next.js configuration with MDXLayer support.
  */
+
 export const withMdxlayer = (nextConfig = {}) => {
   if (isDev) {
-    setInterval(async () => {
+    setTimeout(async () => {
       devProcess ??= await watcher();
     }, 100);
   }
@@ -33,7 +34,7 @@ export const withMdxlayer = (nextConfig = {}) => {
     if (!buildExecuted) {
       buildExecuted = true;
 
-      setInterval(async () => {
+      setTimeout(async () => {
         await builder();
       }, 100);
     }

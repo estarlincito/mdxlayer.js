@@ -1,7 +1,7 @@
 {
   "name": "mdxlayer",
   "type": "module",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Transform your MDX content into typed, JSON-powered data with flexible schema validation.",
   "bin": {
     "mdxlayer": "./dist/cjs/cli.cjs"
@@ -37,13 +37,13 @@
     }
   },
   "scripts": {
-    "version-patch": "npm version patch",
     "check-types": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf dist",
     "build": "pnpm vite build",
     "dev": "pnpm vite build -w",
-    "prepare": "pnpm clean && pnpm lint && pnpm check-types && pnpm build",
+    "version-patch": "npm version patch",
+    "prepublishOnly": "pnpm clean && pnpm lint && pnpm check-types && pnpm build",
     "release": "npm publish --access public"
   },
   "keywords": [
@@ -84,7 +84,7 @@
     "esbuild": "^0.25.5",
     "fast-glob": "^3.3.3",
     "gray-matter": "^4.0.3",
-    "tyne": "^1.0.1",
+    "tyne": "^1.0.4",
     "unified": "^11.0.5"
   }
 }

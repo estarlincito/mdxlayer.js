@@ -12,14 +12,14 @@ const isDev = process.argv.includes("dev");
 const isBuild = process.argv.includes("build");
 const withMdxlayer = (nextConfig = {}) => {
   if (isDev) {
-    setInterval(async () => {
+    setTimeout(async () => {
       devProcess ??= await watcher.watcher();
     }, 100);
   }
   if (isBuild) {
     if (!buildExecuted) {
       buildExecuted = true;
-      setInterval(async () => {
+      setTimeout(async () => {
         await builder.builder();
       }, 100);
     }

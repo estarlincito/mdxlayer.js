@@ -5,11 +5,11 @@
   "version": "0.0.0",
   "scripts": {
     "release": "pnpm -r --filter './packages/*' publish --access public",
-    "version-patch": "pnpm -r version-patch",
+    "version-patch": "pnpm -r --filter './packages/*' version-patch",
     "git": "pnpm version-patch && read -p \"Enter commit message: \" msg; git add .; git commit -m \"$msg\"; git push",
-    "clean": "pnpm -r clean",
-    "build": "pnpm -r build",
-    "lint": "pnpm -r lint",
+    "clean": "pnpm -r --filter './packages/*' clean",
+    "build": "pnpm -r --filter './packages/*' build",
+    "lint": "pnpm -r --filter './packages/*' lint",
     "prebuild": "node readme.ts",
     "check-types": "pnpm -r check-types"
   },
@@ -31,6 +31,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
+      "sharp",
       "unrs-resolver"
     ]
   }
