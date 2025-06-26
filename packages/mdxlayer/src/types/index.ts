@@ -5,14 +5,14 @@ import type { TyneObject, TyneType } from 'tyne';
 import type * as unified from 'unified';
 
 export interface Options {
-  remarkPlugins?: unified.Pluggable[];
-  rehypePlugins?: unified.Pluggable[];
+  remarkPlugins?: unified.Pluggable;
+  rehypePlugins?: unified.Pluggable;
 }
 
 export interface Doc {
   _filePath: string;
   _id: string;
-  _body: { raw: string };
+  _body: { raw: string; html: string };
   [key: string]: any;
 }
 

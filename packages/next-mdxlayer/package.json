@@ -1,11 +1,10 @@
 {
   "name": "next-mdxlayer",
   "type": "module",
-  "version": "1.0.11",
+  "version": "1.0.15",
   "description": "Next.js plugin to integrate mdxlayer CLI and generated content",
-  "types": "./dist/esm/index.d.ts",
-  "main": "./dist/cjs/index.cjs",
-  "module": "./dist/esm/index.mjs",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
   "scripts": {
     "check-types": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
@@ -54,6 +53,6 @@
     "url": "https://github.com/estarlincito/mdxlayer.js/issues"
   },
   "dependencies": {
-    "mdxlayer": "^1.0.8"
+    "mdxlayer": "1.0.15"
   }
 }

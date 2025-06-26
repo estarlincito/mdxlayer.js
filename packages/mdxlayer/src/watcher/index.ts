@@ -9,7 +9,7 @@ import { getUserConfig } from '@/config/index.js';
 import { configPath } from '@/config/path.js';
 
 export const watcher = async () => {
-  console.log('Running initial build...');
+  // console.log('Running initial build...');
   await builder();
   const { contentDir } = await getUserConfig();
   const watchers = watch(
@@ -22,12 +22,12 @@ export const watcher = async () => {
 
   watchers.on('all', async (event, path) => {
     if (path.endsWith(configPath)) {
-      console.log('Reloading configuration...');
+      console.log('⚙️ Reloading configuration...');
       setTimeout(async () => {
         await builder();
       }, 100);
     } else if (path.endsWith('.mdx')) {
-      console.log('Reprocessing MDX content...');
+      // console.log('🗜️ Reprocessing MDX content...');
       setTimeout(async () => {
         await builder();
       }, 100);

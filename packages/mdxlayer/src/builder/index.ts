@@ -1,3 +1,4 @@
+/* eslint-disable safeguard/no-raw-error */
 /* eslint-disable no-console */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -7,12 +8,13 @@ import matter from 'gray-matter';
 
 import { cache } from '@/cache/index.js';
 import { getUserConfig } from '@/config/index.js';
+import { processMarkdown } from '@/plugin/index.js';
 import type { Doc } from '@/types/index.js';
 import { transformFile } from '@/utils/transform.js';
 
-import { toIndexMjs } from './docs/index-mjs.js';
-import { toPackageJson } from './docs/package-json.js';
-import { toTypesDts } from './docs/types-d-ts.js';
+import { toIndexMjs } from './docs/index-js.js';
+import { toPackageJson } from './docs/package.js';
+import { toTypesDts } from './docs/types-d.js';
 
 export const builder = async () => {
   const {
@@ -21,66 +23,85 @@ export const builder = async () => {
     docType = 'Contents',
     resolvedFields,
     frontmatterSchema,
+    options,
   } = await getUserConfig();
 
   const cwd = process.cwd();
-  const filesUpdated = new Set<string>();
   const dir = path.resolve(cwd, contentDir.replace(/^(\.\/|\/)+/, ''));
   const files = await fg(['**/*.mdx'], { cwd: dir });
-  // Checking files
-  files.forEach((file) => {
+
+  // Track processing stats
+  let processedCount = 0;
+  let errorCount = 0;
+
+  // Process files in parallel
+  const processingPromises = files.map(async (file) => {
     const fullPath = path.join(dir, file);
     const isChanged = cache.mtime(fullPath);
 
-    if (isChanged || changed) {
+    if (!isChanged && !changed) {
+      return; // Skip unchanged files
+    }
+
+    try {
       const raw = fs.readFileSync(fullPath, 'utf8');
-
       const { data, content } = matter(raw);
-      // Parsing frontmatterSchema
-      const parsed = frontmatterSchema.safeValidate(data);
 
+      // Validate frontmatter
+      const parsed = frontmatterSchema.safeValidate(data);
       if (!parsed.success) {
-        console.error(`❌ Invalid ${docType} frontmatter:`, parsed.error);
-        process.exit(1);
+        throw new Error(
+          `Invalid ${docType} frontmatter in ${file}: ${!parsed.error}`,
+        );
       }
 
-      // Generating doc
+      // Process markdown to HTML
+      const html = await processMarkdown(options, content);
+
+      // Generate document
       const filename = file.replace(/\.mdx$/, '');
       const doc: Doc = {
         _id: path.basename(filename),
         ...data,
-        _body: { raw: content },
+        _body: { html, raw: content },
         _filePath: fullPath,
       };
 
-      // Resolving fields
+      // Resolve custom fields
       if (resolvedFields) {
         for (const [key, { resolve }] of Object.entries(resolvedFields)) {
           doc[key] = resolve(doc);
         }
       }
 
-      // Saving content from mdx
+      // Save as JSON
       transformFile({
         doc,
         filename: `${filename}.json`,
         subpath: `generated/${docType}`,
       });
 
-      if (!filesUpdated.has(fullPath)) filesUpdated.add(fullPath);
+      processedCount += 1;
+    } catch (err) {
+      console.error(`❌ Error processing ${file}:`, err);
+      errorCount += 1;
     }
   });
 
-  const count = filesUpdated.size;
+  // Wait for all files to process
+  await Promise.all(processingPromises);
 
-  // ading types.d.ts
+  // Generate supporting files
   toTypesDts({ docType, frontmatterSchema, resolvedFields });
-  // ading index.mjs and index.cjs
   toIndexMjs(files, docType);
-  // ading package.json
   toPackageJson();
 
-  if (count > 0) {
-    console.log(`✅ MDXLayout built: ${count} items`);
+  // Report results
+  if (errorCount > 0) {
+    console.error(`❌ MDXLayout completed with ${errorCount} errors`);
+  } else if (processedCount > 0) {
+    console.log(`✅ MDXLayout built: ${processedCount} items updated`);
+  } else {
+    console.log('✅ MDXLayout: No changes detected');
   }
 };

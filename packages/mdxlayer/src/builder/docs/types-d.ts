@@ -10,7 +10,7 @@ export const toTypesDts = ({
   docType,
 }: Pick<Config, 'resolvedFields' | 'frontmatterSchema' | 'docType'>) => {
   const defaultSchema: Record<string, TyneType> = {
-    _body: t.object({ raw: t.string() }),
+    _body: t.object({ html: t.string(), raw: t.string() }),
     _filePath: t.string(),
     _id: t.string(),
   };
@@ -21,15 +21,15 @@ export const toTypesDts = ({
     }
   }
 
-  const doc = t
+  const types = t
     .object({ ...frontmatterSchema.shape, ...defaultSchema })
-    .toDts(docType);
+    .toDts();
 
-  const isChanged = cache.changed(doc, 'types.d.ts');
+  const isChanged = cache.changed(types, 'types.d.ts');
 
   if (isChanged) {
     transformFile({
-      doc,
+      doc: `export type ${docType} = ${types}`,
       filename: 'types.d.ts',
       subpath: 'generated',
     });

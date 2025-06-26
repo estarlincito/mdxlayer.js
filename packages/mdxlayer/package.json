@@ -1,40 +1,40 @@
 {
   "name": "mdxlayer",
   "type": "module",
-  "version": "1.0.11",
+  "version": "1.0.15",
   "description": "Transform your MDX content into typed, JSON-powered data with flexible schema validation.",
   "bin": {
-    "mdxlayer": "./dist/cjs/cli.cjs"
+    "mdxlayer": "./dist/cli.js"
   },
   "exports": {
     ".": {
-      "types": "./dist/esm/index.d.ts",
-      "require": "./dist/cjs/index.cjs",
-      "import": "./dist/esm/index.mjs"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
     "./builder": {
-      "types": "./dist/esm/builder/index.d.ts",
-      "require": "./dist/cjs/builder/index.cjs",
-      "import": "./dist/esm/builder/index.mjs"
+      "types": "./dist/builder/index.d.ts",
+      "import": "./dist/builder/index.js"
     },
     "./watcher": {
-      "types": "./dist/esm/watcher/index.d.ts",
-      "require": "./dist/cjs/watcher/index.cjs",
-      "import": "./dist/esm/watcher/index.mjs"
+      "types": "./dist/watcher/index.d.ts",
+      "import": "./dist/watcher/index.js"
     }
   },
   "typesVersions": {
     "*": {
       "*": [
-        "./dist/esm/index.d.ts"
+        "./dist/index.d.ts"
       ],
       "watcher": [
-        "./dist/esm/watcher/index.d.ts"
+        "./dist/watcher/index.d.ts"
       ],
       "builder": [
-        "./dist/esm/builder/index.d.ts"
+        "./dist/builder/index.d.ts"
       ]
     }
+  },
+  "engines": {
+    "node": ">=16.0.0"
   },
   "scripts": {
     "check-types": "tsc --noEmit",
@@ -78,13 +78,16 @@
     "url": "https://github.com/estarlincito/mdxlayer.js/issues"
   },
   "devDependencies": {
-    "@mdx-js/mdx": "^3.1.0",
-    "@repo/dev": "workspace:*",
+    "@repo/dev": "workspace:^",
     "chokidar": "^4.0.3",
     "esbuild": "^0.25.5",
     "fast-glob": "^3.3.3",
     "gray-matter": "^4.0.3",
-    "tyne": "^1.0.4",
+    "rehype-stringify": "^10.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "tyne": "^1.0.13",
+    "remark-gfm": "^4.0.1",
     "unified": "^11.0.5"
   }
 }

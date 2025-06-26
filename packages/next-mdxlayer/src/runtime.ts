@@ -3,9 +3,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import path from 'node:path';
 
-import { builder } from 'mdxlayer/builder';
-import { watcher } from 'mdxlayer/watcher';
-
 let devProcess = null;
 let buildExecuted = false;
 const isDev = process.argv.includes('dev');
@@ -26,7 +23,7 @@ const isBuild = process.argv.includes('build');
 export const withMdxlayer = (nextConfig = {}) => {
   if (isDev) {
     setTimeout(async () => {
-      devProcess ??= await watcher();
+      devProcess ??= await import('mdxlayer/watcher').then((m) => m.watcher());
     }, 100);
   }
 
@@ -35,7 +32,7 @@ export const withMdxlayer = (nextConfig = {}) => {
       buildExecuted = true;
 
       setTimeout(async () => {
-        await builder();
+        await import('mdxlayer/builder').then((m) => m.builder());
       }, 100);
     }
   }

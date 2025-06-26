@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { pathToFileURL } from 'node:url';
 
 import { build } from 'esbuild';
 
 import { cache } from '@/cache/index.js';
 import type { Config } from '@/types/index.js';
-import { format } from '@/utils/format.js';
 import { transformFile } from '@/utils/transform.js';
 
 import { configPath } from './path.js';
@@ -17,13 +15,13 @@ export interface Configs extends Config {
 }
 
 export const getUserConfig = async (): Promise<Configs> => {
-  const newFilename = `compiled-config.${format === 'esm' ? 'mjs' : format}`;
+  const newFilename = 'compiled-config.js';
   const contents = fs.readFileSync(configPath, 'utf8');
 
   const compiledConfig = async () => {
     const result = await build({
       bundle: false,
-      format,
+      format: 'esm',
       platform: 'node',
       stdin: {
         contents,
@@ -51,17 +49,6 @@ export const getUserConfig = async (): Promise<Configs> => {
     newFilename,
   );
 
-  // CJS
-  if (format === 'cjs') {
-    const filePath = fileURLToPath(pathToFileURL(newConfigPath));
-    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-    delete require.cache[require.resolve(filePath)];
-    const mod = require(filePath);
-
-    return { ...(mod.default ?? mod), changed: isChanged };
-  }
-
-  // ESM
   const configModule = await import(
     `${pathToFileURL(newConfigPath).href}?t=${Date.now()}`
   );
