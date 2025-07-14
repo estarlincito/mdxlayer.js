@@ -1,7 +1,7 @@
 {
   "name": "next-mdxlayer",
   "type": "module",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Next.js plugin to integrate mdxlayer CLI and generated content",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -72,9 +72,6 @@
   "bugs": {
     "url": "https://github.com/estarlincito/mdxlayer.js/issues"
   },
-  "dependencies": {
-    "mdxlayer": "1.0.18"
-  },
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
@@ -83,5 +80,8 @@
     "@repo/dev": "workspace:*",
     "@types/react": "*",
     "@types/react-dom": "*"
+  },
+  "dependencies": {
+    "mdxlayer": "^1.0.19"
   }
 }
