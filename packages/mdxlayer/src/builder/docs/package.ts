@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { cliOutDir } from '@/utils/args.js';
 import { transformFile } from '@/utils/transform.js';
 
 const content = `{
@@ -23,7 +24,7 @@ const content = `{
 }`;
 
 export const toPackageJson = () => {
-  const pkgPath = path.resolve(process.cwd(), '.mdxlayer', 'package.json');
+  const pkgPath = path.resolve(process.cwd(), cliOutDir, 'package.json');
   const isBuild = !fs.existsSync(pkgPath);
 
   if (isBuild) {

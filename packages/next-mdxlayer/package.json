@@ -1,10 +1,33 @@
 {
   "name": "next-mdxlayer",
   "type": "module",
-  "version": "1.0.15",
+  "version": "1.0.18",
   "description": "Next.js plugin to integrate mdxlayer CLI and generated content",
-  "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/index.d.ts"
+      ],
+      "hooks": [
+        "./dist/hooks/index.d.ts"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "check-types": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
@@ -30,9 +53,6 @@
     "nextjs",
     "react"
   ],
-  "devDependencies": {
-    "@repo/dev": "workspace:*"
-  },
   "author": {
     "name": "Estarlin R",
     "email": "dev@estarlincito.com",
@@ -53,6 +73,15 @@
     "url": "https://github.com/estarlincito/mdxlayer.js/issues"
   },
   "dependencies": {
-    "mdxlayer": "1.0.15"
+    "mdxlayer": "1.0.18"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "@repo/dev": "workspace:*",
+    "@types/react": "*",
+    "@types/react-dom": "*"
   }
 }

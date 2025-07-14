@@ -1,19 +1,23 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
-import fs from 'fs';
+import fg from 'fast-glob';
 import path from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
 const dir = path.resolve(process.cwd(), 'src');
-const componentFiles = fs
-  .readdirSync(dir)
-  .filter((file) => file.endsWith('.ts') && file !== 'types.ts');
 
-// Generate entry points dynamically
-const entry = componentFiles.reduce((acc, file) => {
-  const name = path.basename(file, path.extname(file));
+const files = fg.sync(['**/*.ts'], {
+  cwd: dir,
+  ignore: ['**/types.ts', '**/*.test.ts', 'types'],
+  onlyFiles: true,
+  absolute: true,
+});
 
-  return { ...acc, [name]: path.resolve(dir, file) };
+const entry = files.reduce((acc, filePath) => {
+  const relPath = path.relative(dir, filePath);
+  const name = relPath.replace(/\.[tj]s$/, '');
+
+  return { ...acc, [name]: filePath };
 }, {});
 
 const dtsPlugin = dts({
@@ -39,7 +43,6 @@ export const viteConfig = defineConfig({
         {
           format: 'esm',
           dir: 'dist',
-          entryFileNames: '[name].js',
           preserveModules: true,
         },
       ],

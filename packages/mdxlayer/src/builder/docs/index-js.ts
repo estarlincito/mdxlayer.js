@@ -9,7 +9,7 @@ const getExpName = (file: string, docType: string) => {
   const first = path.dirname(file).split(path.sep)[0];
   const main = first === '.' ? 'all' : first;
 
-  return main.charAt(0).toUpperCase() + main.slice(1) + docType;
+  return `${main}${docType}`;
 };
 
 export const toIndexMjs = (files: string[], docType: string) => {

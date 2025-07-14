@@ -10,7 +10,7 @@ export const toTypesDts = ({
   docType,
 }: Pick<Config, 'resolvedFields' | 'frontmatterSchema' | 'docType'>) => {
   const defaultSchema: Record<string, TyneType> = {
-    _body: t.object({ html: t.string(), raw: t.string() }),
+    _body: t.object({ code: t.string(), raw: t.string() }),
     _filePath: t.string(),
     _id: t.string(),
   };

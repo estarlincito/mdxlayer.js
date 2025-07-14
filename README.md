@@ -12,6 +12,14 @@ Transform your `.mdx` content into strongly typed, structured JSON and TypeScrip
 - ✅ Type-safe at every level
 - 📦 Simple CLI: `mdxlayer build` & `mdxlayer dev`
 
+## 📑 Requirements
+
+- Node.js 18+ (ESM only)
+- `mdxlayer` installed globally or locally
+- MDX files must follow this rule: **no spaces in filenames**
+  ✅ `about.mdx`
+  ❌ `about me.mdx`
+
 ## 📦 Installation
 
 ```bash
@@ -24,7 +32,7 @@ yarn add -D mdxlayer
 
 ## ⚙️ Configuration
 
-Create a `mdxlayer.config.mts` file:
+Create a `mdxlayer.config.ts` file:
 
 ```ts
 import { defineConfig } from 'mdxlayer';
@@ -47,7 +55,7 @@ const ArticleSchema = t.object({
 });
 
 export default defineConfig({
-  name: 'Articles',
+  docType: 'Articles',
   contentDir: 'content',
   frontmatterSchema: ArticleSchema,
   resolvedFields: {
@@ -111,9 +119,11 @@ Hello!
 ## ✨ Usage in Code
 
 ```ts
-import { EsArticles, EnArticles, AllArticles } from 'mdxlayer/generated';
+import { esArticles, enArticles, allArticles } from 'mdxlayer/generated';
 
-console.log(EsArticles[0].title);
+console.log(esArticles);
+console.log(enArticles);
+console.log(allArticles);
 ```
 
 ## 🖥 CLI Commands
@@ -124,19 +134,35 @@ pnpm mdxlayer build
 
 pnpm mdxlayer dev
 # Watch mode — regenerate on file changes
+
+pnpm mdxlayer build --config docs.config.js
+# This will load settings from `docs.config.js`
+
+mdxlayer build --config docs.config.js --out docs-content
+# This will load `docs.config.js` and output to `docs-content/`
+```
+
+## 📁 Folder Structure
+
+```
+content/
+├── what-makes-mdx-powerful.mdx
 ```
 
 ## 📁 Output Structure
 
 ```
 .mdxlayer/
+├── cache/
+│   ├── compiled-config.js
+│   ├── data.json
 ├── generated/
 │   ├── Articles/
-│   │   ├── en.json
-│   │   ├── es.json
-│   │   └── all.json
+│   │   ├── what-makes-mdx-powerful.json
+│   ├── types.d.ts
 │   ├── index.d.ts
 │   └── index.js
+├── package.json
 ```
 
 ## Plugins
@@ -170,6 +196,28 @@ const nextConfig = {
 export default withMdxlayer(nextConfig);
 ```
 
+```ts
+ import { useMDXComponent } from 'next-mdxlayer/hook';
+ import { allServices } from 'mdxlayer/generated';
+ import MyAudioComponent from './audio'
+ import MyIntroComponent from './intro'
+
+
+ export default function MyPage() {
+   const MDXComponent = useMDXComponent(allServices[0]._body.code);
+   return (
+     <MDXComponent
+       components={{
+         a: (props) => <a {...props} className="underline text-blue-600" />,
+         img: (props) => <img {...props} style={{ maxWidth: '100%' }} />,
+         Audio: MyAudioComponent,
+         Introduction: MyIntroComponent,
+       }}
+     />
+   );
+ }
+```
+
 ## 🔩 API
 
 ### `defineConfig(config)`
@@ -194,7 +242,7 @@ interface Config {
 interface Doc {
   _filePath: string;
   _id: string;
-  _body: { raw: string };
+  _body: { raw: string; code: string };
   // + fields from your frontmatterSchema
 }
 ```

@@ -1,13 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { cliOutDir } from '@/utils/args.js';
 import { hash } from '@/utils/hash.js';
 import { transformFile } from '@/utils/transform.js';
 
 export type Cache = Record<string, number>;
 
 const get = (): Cache => {
-  const cachePath = path.resolve(process.cwd(), `.mdxlayer/cache`, `data.json`);
+  const cachePath = path.resolve(
+    process.cwd(),
+    `${cliOutDir}/cache`,
+    `data.json`,
+  );
   if (!fs.existsSync(cachePath)) return {};
   return JSON.parse(fs.readFileSync(cachePath, 'utf8'));
 };

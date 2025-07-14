@@ -5,6 +5,8 @@ import path from 'node:path';
 import type { Cache } from '@/cache/index.js';
 import type { Doc } from '@/types/index.js';
 
+import { cliOutDir } from './args.js';
+
 export interface TransformFileParams {
   doc: Doc | string | Cache;
   subpath: string;
@@ -18,7 +20,7 @@ export const transformFile = ({
 }: TransformFileParams) => {
   const outputPath = path.resolve(
     process.cwd(),
-    `.mdxlayer/${subpath}`,
+    `${cliOutDir}/${subpath}`,
     filename,
   );
 

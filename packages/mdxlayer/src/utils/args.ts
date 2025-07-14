@@ -1,9 +1,27 @@
-export const getArgs = (arg: string | string[]) => {
-  const args = process.argv.slice(2);
+const cliArgs = process.argv.slice(2);
 
-  if (typeof arg === 'string') {
-    return args.includes(arg);
+export const hasCliFlag = (flags: string | string[]) => {
+  if (typeof flags === 'string') {
+    return cliArgs.includes(flags);
   }
-
-  return arg.some((a) => args.includes(a));
+  return flags.some((flag) => cliArgs.includes(flag));
 };
+
+export const cliConfigFile = (() => {
+  if (hasCliFlag('--config')) {
+    const maybeConfig = cliArgs[cliArgs.indexOf('--config') + 1];
+
+    return maybeConfig ?? null;
+  }
+  return null;
+})();
+
+export const cliOutDir = (() => {
+  const defaultOutDir = '.mdxlayer';
+  if (hasCliFlag('--out')) {
+    const maybeOut = cliArgs[cliArgs.indexOf('--out') + 1];
+
+    return maybeOut ?? defaultOutDir;
+  }
+  return defaultOutDir;
+})();

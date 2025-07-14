@@ -8,7 +8,7 @@ import matter from 'gray-matter';
 
 import { cache } from '@/cache/index.js';
 import { getUserConfig } from '@/config/index.js';
-import { processMarkdown } from '@/plugin/index.js';
+import { processMDX } from '@/plugin/index.js';
 import type { Doc } from '@/types/index.js';
 import { transformFile } from '@/utils/transform.js';
 
@@ -19,8 +19,8 @@ import { toTypesDts } from './docs/types-d.js';
 export const builder = async () => {
   const {
     changed,
-    contentDir = 'contents',
-    docType = 'Contents',
+    contentDir = 'content',
+    docType = 'Content',
     resolvedFields,
     frontmatterSchema,
     options,
@@ -55,23 +55,30 @@ export const builder = async () => {
         );
       }
 
-      // Process markdown to HTML
-      const html = await processMarkdown(options, content);
+      // Process markdown to code
+      const code = await processMDX(options, content);
 
       // Generate document
       const filename = file.replace(/\.mdx$/, '');
       const doc: Doc = {
         _id: path.basename(filename),
         ...data,
-        _body: { html, raw: content },
+        _body: { code, raw: content },
         _filePath: fullPath,
       };
 
       // Resolve custom fields
       if (resolvedFields) {
-        for (const [key, { resolve }] of Object.entries(resolvedFields)) {
-          doc[key] = resolve(doc);
-        }
+        const promises = Object.entries(resolvedFields).map(([, { resolve }]) =>
+          resolve(doc),
+        );
+
+        const results = await Promise.all(promises);
+
+        results.forEach((value, i) => {
+          const key = Object.keys(resolvedFields)[i];
+          doc[key] = value;
+        });
       }
 
       // Save as JSON

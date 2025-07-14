@@ -12,7 +12,7 @@ export interface Options {
 export interface Doc {
   _filePath: string;
   _id: string;
-  _body: { raw: string; html: string };
+  _body: { raw: string; code: string };
   [key: string]: any;
 }
 

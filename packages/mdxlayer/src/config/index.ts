@@ -6,6 +6,7 @@ import { build } from 'esbuild';
 
 import { cache } from '@/cache/index.js';
 import type { Config } from '@/types/index.js';
+import { cliOutDir } from '@/utils/args.js';
 import { transformFile } from '@/utils/transform.js';
 
 import { configPath } from './path.js';
@@ -45,7 +46,7 @@ export const getUserConfig = async (): Promise<Configs> => {
 
   const newConfigPath = path.resolve(
     process.cwd(),
-    `.mdxlayer/cache`,
+    `${cliOutDir}/cache`,
     newFilename,
   );
 
