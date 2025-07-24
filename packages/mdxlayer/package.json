@@ -1,7 +1,7 @@
 {
   "name": "mdxlayer",
   "type": "module",
-  "version": "1.0.18",
+  "version": "1.0.21",
   "description": "Transform your MDX content into typed, JSON-powered data with flexible schema validation.",
   "bin": {
     "mdxlayer": "./dist/cli.js"

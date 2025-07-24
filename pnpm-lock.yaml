@@ -78,8 +78,8 @@ importers:
   packages/next-mdxlayer:
     dependencies:
       mdxlayer:
-        specifier: 1.0.18
-        version: 1.0.18(acorn@8.15.0)
+        specifier: ^1.0.20
+        version: 1.0.20(acorn@8.15.0)
       react:
         specifier: '*'
         version: 19.1.0
@@ -96,6 +96,25 @@ importers:
       '@types/react-dom':
         specifier: '*'
         version: 19.1.6(@types/react@19.1.8)
+
+  playground/mdx-cong:
+    dependencies:
+      esbuild:
+        specifier: ^0.25.5
+        version: 0.25.5
+      esbuild-node-externals:
+        specifier: ^1.18.0
+        version: 1.18.0(esbuild@0.25.5)
+      mdxlayer:
+        specifier: workspace:*
+        version: link:../../packages/mdxlayer
+      tyne:
+        specifier: ^1.0.13
+        version: 1.0.13
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
 
   playground/multiple-builds:
     dependencies:
@@ -1781,6 +1800,12 @@ packages:
   esast-util-from-js@2.0.1:
     resolution: {integrity: sha512-8Ja+rNJ0Lt56Pcf3TAmpBZjmx8ZcK5Ts4cAzIOjsjevg9oSXJnl6SUQ2EevU8tv3h6ZLWmoKL5H4fgWvdvfETw==}
 
+  esbuild-node-externals@1.18.0:
+    resolution: {integrity: sha512-suFVX3SzZlXrGIS9Yqx+ZaHL4w1p0e/j7dQbOM9zk8SfFpnAGnDplHUKXIf9kcPEAfZRL66JuYeVSVlsSEQ5Eg==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      esbuild: 0.12 - 0.25
+
   esbuild@0.25.5:
     resolution: {integrity: sha512-P8OtKZRv/5J5hhz0cUAdu/cLuPIKXpQl1R9pZtvmHWQvrAUVd0UNIPT4IB4W3rNOqVO0rlqHmCIbSwxh/c9yUQ==}
     engines: {node: '>=18'}
@@ -2655,8 +2680,8 @@ packages:
     peerDependencies:
       esbuild: 0.*
 
-  mdxlayer@1.0.18:
-    resolution: {integrity: sha512-WW4QP6W9UBsw5V5XfMpM5wOP4PsH4+SF/o2NZKxJzB73BU/L+B1HbUgWkRxGYMTqDcoiGhCBzEVu1hNw2QRbjA==}
+  mdxlayer@1.0.20:
+    resolution: {integrity: sha512-e3LxK12hnazBDxdWmEoKE9bO0dc/CztsaxvP/Vh0D1fyLHp8GU3zHNsuHf1gOjtr2m0hGR3WbWXljHLCZva+sg==}
     engines: {node: '>=16.0.0'}
     hasBin: true
 
@@ -5457,6 +5482,11 @@ snapshots:
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
 
+  esbuild-node-externals@1.18.0(esbuild@0.25.5):
+    dependencies:
+      esbuild: 0.25.5
+      find-up: 5.0.0
+
   esbuild@0.25.5:
     optionalDependencies:
       '@esbuild/aix-ppc64': 0.25.5
@@ -6740,7 +6770,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  mdxlayer@1.0.18(acorn@8.15.0):
+  mdxlayer@1.0.20(acorn@8.15.0):
     dependencies:
       '@mdx-js/mdx': 3.1.0(acorn@8.15.0)
       chokidar: 4.0.3

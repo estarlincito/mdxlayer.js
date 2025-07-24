@@ -1,7 +1,7 @@
 {
   "name": "next-mdxlayer",
   "type": "module",
-  "version": "1.0.19",
+  "version": "1.0.21",
   "description": "Next.js plugin to integrate mdxlayer CLI and generated content",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -82,6 +82,6 @@
     "@types/react-dom": "*"
   },
   "dependencies": {
-    "mdxlayer": "^1.0.19"
+    "mdxlayer": "^1.0.21"
   }
 }

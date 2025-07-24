@@ -13,14 +13,17 @@ const CONFIG_FILENAMES = [
 ];
 
 export const configPath = (() => {
+  const cwd = process.cwd();
+
   // ============ Loading user config from args ==================
   if (cliConfigFile) {
-    if (fs.existsSync(cliConfigFile)) return cliConfigFile;
+    const fullPath = path.resolve(cwd, cliConfigFile);
+    if (fs.existsSync(cliConfigFile)) return fullPath;
   }
 
   // ============ Loading default user config ==================
   for (const filename of CONFIG_FILENAMES) {
-    const fullPath = path.resolve(process.cwd(), filename);
+    const fullPath = path.resolve(cwd, filename);
     if (fs.existsSync(fullPath)) return fullPath;
   }
 
